@@ -1,0 +1,4 @@
+node_modules
+/libs/main.json
+/rethinkdb_data
+.idea

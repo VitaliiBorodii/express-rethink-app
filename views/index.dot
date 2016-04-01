@@ -1,0 +1,8 @@
+---
+layout: layout.dot
+title: [[= model.title]]
+---
+
+[[##content:
+   <h1>Home page</h1>
+#]]
