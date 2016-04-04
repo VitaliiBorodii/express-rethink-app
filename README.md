@@ -1,16 +1,22 @@
 # express-rethink-app
 
-brew install rethinkdb - to install DB
+`brew install rethinkdb` - to install DB
 
-rethinkdb - to launch DB
-
-
-npm install babel-cli --global - to run Node.js in ES6 mode
+`rethinkdb` - to launch DB
 
 
-npm install - install local modules
+`npm install babel-cli --global` - to run Node.js in ES6 mode
 
 
-npm start - start server
+`npm install` - install local modules
+
+
+`npm build` - build javascript assets
+
+
+
+`npm start` - start server
+
+
 
 
