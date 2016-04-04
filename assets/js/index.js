@@ -12,7 +12,6 @@ socket.on('insert', function (data) {
 });
 socket.on('delete', function (data) {
     console.log('delete', data);
-    var idxToDelete;
     items = items.filter((item) => {
             return item.id !== data.data.id
         });
