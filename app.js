@@ -21,6 +21,10 @@ app.set('port', port);
 app.set('ip', ip);
 var server = http.Server(app);
 
+//websocket
+var socket = io(server);
+var sessionObj = session(app);
+var ws = websocket(socket, sessionObj);
 
 // view engine setup
 app.engine('dot', engine.__express);
@@ -68,10 +72,5 @@ app.use(function(err, req, res, next) {
 server.listen(port, ip, function () {
     console.log("✔ Server listening at %s://%s:%d ", 'http', ip, port);
 });
-
-//websocket
-var socket = io(server);
-var sessionObj = session(app);
-var ws = websocket(socket, sessionObj);
 
 export default app;
