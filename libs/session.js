@@ -1,12 +1,14 @@
-import rdbStore from './rethink';
+import {rdbStore} from './rethink';
 import session from 'express-session';
 
 export default (app) => {
-    app.use(session({
-        key: 'sid',
+    var newSession = session({
+        resave: true,
         secret: 'my5uperSEC537(key)!',
+        saveUninitialized: true,
         cookie: { maxAge: 860000 },
         store: rdbStore
-    }));
-    return session;
+    })
+    app.use(newSession);
+    return newSession;
 };

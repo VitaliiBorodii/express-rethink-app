@@ -12,19 +12,14 @@ import db from './libs/rethink';
 import session from './libs/session';
 import io from 'socket.io';
 import routes from './routes';
+import websocket from './libs/websocket';
 var app = express();
 var port = config.get('server:port');
 var ip = config.get('server:ip');
 
 app.set('port', port);
 app.set('ip', ip);
-var server = http.createServer(app);
-
-//websocket
-import websocket from './libs/websocket';
-var socket = io.listen(server);
-var sessionObj = session(app)
-var ws = websocket(socket, sessionObj);
+var server = http.Server(app);
 
 
 // view engine setup
@@ -73,5 +68,10 @@ app.use(function(err, req, res, next) {
 server.listen(port, ip, function () {
     console.log("✔ Server listening at %s://%s:%d ", 'http', ip, port);
 });
+
+//websocket
+var socket = io(server);
+var sessionObj = session(app);
+var ws = websocket(socket, sessionObj);
 
 export default app;

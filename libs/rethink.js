@@ -1,15 +1,12 @@
 import session from 'express-session';
-import r from 'rethinkdb';
 import RDBStore from 'express-session-rethinkdb';
 import config from 'nconf';
+import thinkyLib from 'thinky';
 var Store = RDBStore(session);
-r.connect(config.get('rethink'), (err, conn) => {
-    if (err) {
-        throw err
-    } else {
-        console.log('connection to DB has been successfully established')
-    }
+var rethinkConfig = config.get('rethink');
+export default thinkyLib({
+    host: rethinkConfig.connectOptions.servers[0].host,
+    port: rethinkConfig.connectOptions.servers[0].port,
+    db: rethinkConfig.connectOptions.db
 });
-var rdbStore = new Store(config.get('rethink'));
-
-export default rdbStore;
+export const rdbStore = new Store(rethinkConfig);
