@@ -5,11 +5,11 @@ import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import engine from 'express-dot-engine';
-import config from './libs/config';
 import http from 'http';
+import io from 'socket.io';
+import config from './libs/config';
 import db from './libs/rethink';
 import session from './libs/session';
-import io from 'socket.io';
 import routes from './routes';
 import websocket from './libs/websocket';
 var app = express();
@@ -19,11 +19,6 @@ var ip = config.get('server:ip');
 app.set('port', port);
 app.set('ip', ip);
 var server = http.Server(app);
-
-//websocket
-var socket = io(server);
-var sessionObj = session(app);
-var ws = websocket(socket, sessionObj);
 
 // view engine setup
 app.engine('dot', engine.__express);
@@ -36,7 +31,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //routes and session
+app.use(session);
 routes(app);
+
+//websocket
+var socket = io(server);
+var ws = websocket(socket);
 
 app.use(express.static('public'));
 
@@ -59,7 +59,6 @@ app.use(function(err, req, res, next) {
             err.stack = dev ? err.stack : '';
             res.render('error', {
                 title: 'Error',
-                logged: !!req.session.userId,
                 message: err.message,
                 error: err
             });
@@ -70,7 +69,7 @@ app.use(function(err, req, res, next) {
     });
 });
 server.listen(port, ip, function () {
-    console.log("✔ Server listening at %s://%s:%d ", 'http', ip, port);
+    console.log("✔ Server listening at http://%s:%d ", ip, port);
 });
 
 export default app;

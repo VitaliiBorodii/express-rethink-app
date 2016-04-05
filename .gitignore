@@ -1,5 +1,5 @@
 node_modules
-/libs/main.json
+/config/main.json
 /rethinkdb_data
 /public/dist
 .idea

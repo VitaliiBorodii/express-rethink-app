@@ -2,22 +2,22 @@ import io from 'socket.io-client';
 window.addEventListener('load', () => {
 var socket = io.connect(location.origin, {'force new connection': true});
 var items = [];
-socket.on('connect', function (data) {
+socket.on('connect', (data) = > {
     console.log('connected');
 });
-socket.on('insert', function (data) {
+socket.on('insert', (data) = > {
     console.log('insert',data);
     items.push(data.data);
     buildItems();
 });
-socket.on('delete', function (data) {
+socket.on('delete', (data) = > {
     console.log('delete', data);
     items = items.filter((item) => {
             return item.id !== data.data.id
         });
     buildItems();
 });
-socket.on('update', function (data) {
+socket.on('update', (data) = > {
     console.log('update', data);
     items.forEach((item, idx) => {
         if (item.id === data.newData.id) {
@@ -42,8 +42,9 @@ xhr.send(null);
 function buildItems() {
     var lis = [];
     for (let i = 0; i < items.length; i++) {
-        lis.push(`<li>${items[i].id} | ${items[i].title}</li>`)
+        lis.push(`<li>${items[i].id} | ${items[i].title}</li>`);
     }
     elem.innerHTML = lis.join('\n');
 }
 })
+;
