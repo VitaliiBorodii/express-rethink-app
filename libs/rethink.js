@@ -1,6 +1,6 @@
 import config from './config';
-import thinkyLib from 'thinky';
-export default thinkyLib({
+import thinky from 'thinky';
+export default thinky({
     host: config.get('rethink:host'),
     port: config.get('rethink:port'),
     db: config.get('rethink:db')

@@ -1,7 +1,7 @@
 import config from './config';
-import session from 'express-session';
+import expressSession from 'express-session';
 import RDBStore from 'express-session-rethinkdb';
-var Store = RDBStore(session);
+var Store = RDBStore(expressSession);
 
 const rdbStore = new Store({
     connectOptions: {
@@ -22,7 +22,7 @@ const rdbStore = new Store({
     debug: false
 });
 
-var newSession = session({
+var session = expressSession({
     resave: true,
     secret: 'my5uperSEC537(key)!',
     saveUninitialized: true,
@@ -30,4 +30,4 @@ var newSession = session({
     store: rdbStore
 });
 
-export default newSession;
+export default session;
