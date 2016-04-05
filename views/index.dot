@@ -4,5 +4,6 @@ title: [[= model.title]]
 ---
 
 [[##content:
-   <h1>Home page</h1>
+   <ul class="list-container">
+   <script src="dist/js/app.js"></script>
 #]]
