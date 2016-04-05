@@ -1,4 +1,3 @@
-import session from 'express-session';
 import config from './config';
 import thinkyLib from 'thinky';
 export default thinkyLib({

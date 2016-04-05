@@ -14,20 +14,20 @@ export default function (io, session) {
             }
             if (doc.isSaved() === false) {
                 console.log("The following document was deleted:");
-                console.log(JSON.stringify(doc));
+                console.log(doc);
                 io.emit('delete', {data: doc})
             }
             else if (doc.getOldValue() == null) {
                 console.log("A new document was inserted:");
-                console.log(JSON.stringify(doc));
+                console.log(doc);
                 io.emit('insert', {data: doc})
             }
             else {
                 console.log("A document was updated.");
                 console.log("Old value:");
-                console.log(JSON.stringify(doc.getOldValue()));
+                console.log(doc.getOldValue());
                 console.log("New value:");
-                console.log(JSON.stringify(doc));
+                console.log(doc);
                 io.emit('update', {
                     oldData: doc.getOldValue(),
                     newData: doc
