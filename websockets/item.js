@@ -1,8 +1,6 @@
 import Item from '../models/Item';
 
-export default (io) =
->
-{
+export default (io) => {
     Item.changes().then(function (feed) {
         feed.each(function (error, doc) {
             if (error) {
