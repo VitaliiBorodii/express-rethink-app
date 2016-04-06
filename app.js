@@ -7,11 +7,13 @@ import bodyParser from 'body-parser';
 import engine from 'express-dot-engine';
 import http from 'http';
 import io from 'socket.io';
+import auth from './routes/auth'
 import config from './libs/config';
 import db from './libs/rethink';
 import session from './libs/session';
 import routes from './routes';
 import websocket from './libs/websocket';
+import authRouter from './routes/auth/auth-router'
 var app = express();
 var port = config.get('server:port');
 var ip = config.get('server:ip');
@@ -19,7 +21,6 @@ var ip = config.get('server:ip');
 app.set('port', port);
 app.set('ip', ip);
 var server = http.Server(app);
-
 // view engine setup
 app.engine('dot', engine.__express);
 app.set('views', path.join(__dirname, 'views'));
@@ -31,8 +32,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //routes and session
-app.use(session);
+app.use(session).use(auth.initialize()).use(auth.session());
 routes(app);
+app.use('/auth', authRouter);
 
 //websocket
 var socket = io(server);

@@ -23,10 +23,13 @@ const rdbStore = new Store({
 });
 
 var session = expressSession({
-    resave: true,
+    resave: false,
     secret: 'my5uperSEC537(key)!',
     saveUninitialized: true,
-    cookie: {maxAge: 860000},
+    cookie: {
+        secure : false,
+        maxAge: 860000
+    },
     store: rdbStore
 });
 
