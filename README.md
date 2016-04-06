@@ -14,8 +14,13 @@
 `npm build` - build javascript assets
 
 
+`npm run seed` - create db with tables in rethinkdb
 
-`npm start` - start server
+
+`npm run server` - launch server
+
+
+`npm start` - run 'seed' script and will launch server after DB and all tables with indexes are created
 
 
 
