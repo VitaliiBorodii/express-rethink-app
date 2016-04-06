@@ -5,7 +5,7 @@ import config from 'nconf';
 import passport from 'passport';
 import githubPassport from 'passport-github';
 import thinky from '../../libs/rethink';
-var r = thinky.r;
+import User from '../../models/User'
 var GitHubStrategy = githubPassport.Strategy;
 
 passport.serializeUser(function (user, done) {
@@ -13,10 +13,8 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (id, done) {
-    r
-        .table('users')
+    User
         .get(id)
-        .run(r.conn)
         .then(function (user) {
             done(null, user);
         });
@@ -25,11 +23,9 @@ passport.deserializeUser(function (id, done) {
 var loginCallbackHandler = function (objectMapper, type) {
     return function (accessToken, refreshToken, profile, done) {
         if (accessToken !== null) {
-            r
-                .table('users')
+            User
                 .getAll(profile.username, { index: 'login' })
                 .filter({ type: type })
-                .run(r.conn)
                 .then(function (cursor) {
                     return (cursor.toArray) ? cursor.toArray()
                         .then(cb) : cb(cursor);
@@ -37,13 +33,11 @@ var loginCallbackHandler = function (objectMapper, type) {
                         if (users.length > 0) {
                             return done(null, users[0]);
                         }
-                        return r.table('users')
+                        return User
                             .insert(objectMapper(profile))
-                            .run(r.conn)
                             .then(function (response) {
-                                return r.table('users')
+                                return User
                                     .get(response.generated_keys[0])
-                                    .run(r.conn);
                             })
                             .then(function (newUser) {
                                 done(null, newUser);
