@@ -6,16 +6,6 @@ title: [[= model.title]]
 [[##content:
    <ul class="list-container"></ul>
    <hr color='blue' ></hr>
-   [[? model.user]]
-   <div>
-   <img src=[[= model.user.avatarUrl]]/>
-   <p><a href=[[= model.user.url]] target="_blank">
-   [[= (model.user.name ||  model.user.login)]]
-   </a></p>
-   <div>
-   <a href="/auth/logout">Logout</a>
-   [[??]]
-      <a href="/auth/login/github">Login via github</a>
-   [[?]]
+   <div class="user-container"></div>
    <script src="dist/js/app.js"></script>
 #]]

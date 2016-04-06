@@ -27,6 +27,7 @@ socket.on('update', (data) => {
     buildItems();
 });
 var elem =  document.getElementsByClassName('list-container')[0];
+var userElem = document.getElementsByClassName('user-container')[0];
 var xhr = new XMLHttpRequest();
 xhr.open('GET', '/items', true);
 xhr.onreadystatechange = () => {
@@ -44,7 +45,16 @@ xhr2.open('GET', '/auth/user', true);
 xhr2.onreadystatechange = () => {
     if (xhr2.readyState == 4) {
         if(xhr2.status == 200) {
-            console.log(JSON.parse(xhr2.responseText))
+            var user = JSON.parse(xhr2.responseText);
+            userElem.innerHTML = `<div>
+   <img src=${user.avatarUrl}/>
+   <p><a href=${user.url} target="_blank">
+   ${user.name ||  user.login}
+   </a></p>
+   <div>
+   <a href="/auth/logout">Logout</a>`;
+        } else {
+            userElem.innerHTML = `<a href="/auth/login/github">Login via github</a>`;
         }
     }
 };
