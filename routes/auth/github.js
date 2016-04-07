@@ -6,20 +6,22 @@ var GitHubStrategy = githubPassport.Strategy;
 
 export default function (passport, handler) {
     var callbackURL = 'http://' + config.get('server:ip') + ':' + config.get('server:port') + '/auth/login/callback';
-    passport.use(new GitHubStrategy({
-            clientID: config.get('github:clientID'),
-            clientSecret: config.get('github:clientSecret'),
-            callbackURL: callbackURL + '/github'
-        },
-        handler(function (profile) {
-            return {
-                'originalId': profile.id,
-                'login': profile.username,
-                'name': profile.displayName || null,
-                'url': profile.profileUrl,
-                'avatarUrl': profile._json.avatar_url,
-                'type': 'github'
-            };
-        }, 'github')
-    ));
+    if (config.get('github:clientID')) {
+        passport.use(new GitHubStrategy({
+                clientID: config.get('github:clientID'),
+                clientSecret: config.get('github:clientSecret'),
+                callbackURL: callbackURL + '/github'
+            },
+            handler(function (profile) {
+                return {
+                    'originalId': profile.id,
+                    'login': profile.username,
+                    'name': profile.displayName || null,
+                    'url': profile.profileUrl,
+                    'avatarUrl': profile._json.avatar_url,
+                    'type': 'github'
+                };
+            }, 'github')
+        ));
+    }
 }
