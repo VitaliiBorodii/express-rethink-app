@@ -49,7 +49,7 @@ app.use(function(req, res, next) {
 
 var dev = (app.get('env') === 'development');
 //error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
     res.status(err.status || 500);
     res.format({
         text: function () {

@@ -22,6 +22,8 @@
 
 `npm start` - run 'seed' script and will launch server after DB and all tables with indexes are created
 
+`npm run jshint` - check code in js files
+
 
 
 

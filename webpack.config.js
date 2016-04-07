@@ -2,7 +2,6 @@
 'use strict';
 
 var path = require('path');
-var webpack = require('webpack');
 var srcDir = '/assets';
 var distDir = 'public/dist';
 
