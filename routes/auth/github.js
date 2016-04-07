@@ -16,6 +16,7 @@ export default function (passport, handler) {
                 return {
                     'originalId': profile.id,
                     'login': profile.username,
+                    'email': profile.email || null,
                     'name': profile.displayName || null,
                     'url': profile.profileUrl,
                     'avatarUrl': profile._json.avatar_url,

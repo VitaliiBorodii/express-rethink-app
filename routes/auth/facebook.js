@@ -11,15 +11,16 @@ export default function (passport, handler) {
                 clientID: config.get('facebook:clientID'),
                 clientSecret: config.get('facebook:clientSecret'),
                 callbackURL: callbackURL,
-                profileFields: ['id', 'displayName', 'photos', 'first_name', 'link', 'last_name', 'email']
+                profileFields: ['id', 'displayName', 'picture', 'first_name', 'link', 'last_name', 'email']
             },
             handler(function (profile) {
                 return {
                     'originalId': profile.id,
                     'login': profile.username,
+                    'email': profile.email || null,
                     'name': profile.displayName || null,
                     'url': profile.profileUrl,
-                    'avatarUrl': profile.photos[0] ? profile.photos[0].value : null,
+                    'avatarUrl': profile._json.picture.data.url,
                     'type': 'facebook'
                 };
             }, 'facebook')));

@@ -11,7 +11,7 @@ authRouter.use('/login/callback/github', auth.authenticate('github'), authContro
 authRouter.get('/login/github', auth.authenticate('github'));
 
 //FaceBook
-authRouter.get('/login/facebook', auth.authenticate('facebook'));
+authRouter.get('/login/facebook', auth.authenticate('facebook', { scope: ['email', 'public_profile', 'user_location', 'user_photos', 'user_birthday'] }));
 authRouter.use('/login/callback/facebook', auth.authenticate('facebook'), authControllers.login);
 
 
