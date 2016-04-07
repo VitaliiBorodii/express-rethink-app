@@ -12,7 +12,7 @@ r.init({
     'session',
     {
         name: 'users',
-        indexes: ['login']
+        indexes: ['originalId']
     }
 ])
 .then(function (conn) {

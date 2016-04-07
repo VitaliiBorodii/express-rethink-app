@@ -54,7 +54,8 @@ xhr2.onreadystatechange = () => {
    <div>
    <a href="/auth/logout">Logout</a>`;
         } else {
-            userElem.innerHTML = `<a href="/auth/login/github">Login via github</a>`;
+            userElem.innerHTML = `<div><a href="/auth/login/github">Login via github</a></div>
+            <div><a href="/auth/login/facebook">Login via facebook</a></div>`;
         }
     }
 };
