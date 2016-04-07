@@ -1,4 +1,3 @@
-/*jshint node:true */
 'use strict';
 
 import r from 'rethinkdb';
@@ -12,13 +11,12 @@ r.init({
     db: config.get('rethink:db')
 }, [
     {
-        name: 'items',
-        indexes: ['id']
+        name: 'items'
     },
     'session',
     {
         name: 'users',
-        indexes: ['originalId', 'id']
+        indexes: ['originalId']
     }
 ])
 .then(function (conn) {
