@@ -1,10 +1,7 @@
-/*jshint node:true */
 'use strict';
 
-import config from 'nconf';
 import passport from 'passport';
-import github from './github'
-import thinky from '../../libs/rethink';
+import github from './github';
 import User from '../../models/User';
 import facebook from './facebook';
 
@@ -36,11 +33,13 @@ function loginCallbackHandler (objectMapper, type) {
                         if (users.length > 0) {
                             return done(null, users[0]);
                         }
+                        var userToCreate = objectMapper(profile);
+                        userToCreate.role = 'user';
                         return User
-                            .insert(objectMapper(profile))
+                            .insert(userToCreate)
                             .then(function (response) {
                                 return User
-                                    .get(response.generated_keys[0])
+                                    .get(response.generated_keys[0]);
                             })
                             .then(function (newUser) {
                                 done(null, newUser);
@@ -52,7 +51,7 @@ function loginCallbackHandler (objectMapper, type) {
                 });
         }
     };
-};
+}
 
 
 passport.checkIfLoggedIn = function (req, res, next) {

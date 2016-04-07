@@ -11,11 +11,14 @@ r.init({
     port: config.get('rethink:port'),
     db: config.get('rethink:db')
 }, [
-    'items',
+    {
+        name: 'items',
+        indexes: ['id']
+    },
     'session',
     {
         name: 'users',
-        indexes: ['originalId']
+        indexes: ['originalId', 'id']
     }
 ])
 .then(function (conn) {

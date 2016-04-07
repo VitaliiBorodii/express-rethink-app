@@ -13,12 +13,12 @@ export default (io) => {
             if (doc.isSaved() === false) {
                 console.log("The following document was deleted:");
                 console.log(doc);
-                io.emit('delete', {data: doc})
+                io.emit('delete', {data: doc});
             }
-            else if (doc.getOldValue() == null) {
+            else if (doc.getOldValue() === null) {
                 console.log("A new document was inserted:");
                 console.log(doc);
-                io.emit('insert', {data: doc})
+                io.emit('insert', {data: doc});
             }
             else {
                 console.log("A document was updated.");
@@ -29,11 +29,11 @@ export default (io) => {
                 io.emit('update', {
                     oldData: doc.getOldValue(),
                     newData: doc
-                })
+                });
             }
         });
     }).error(function (error) {
         console.log(error);
         process.exit(1);
     });
-}
+};

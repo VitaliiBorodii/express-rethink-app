@@ -1,4 +1,3 @@
-/*jshint node:true */
 'use strict';
 
 import sharedsession  from "express-socket.io-session";
@@ -11,9 +10,9 @@ export default function (io) {
         resave: true,
         saveUninitialized: true
     }));
-    io.on('connection', (socket) => {
+    io.on('connection', () => {
         console.log('user joined!');
         });
     item(io);
     return io;
-};
+}

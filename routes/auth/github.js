@@ -1,9 +1,8 @@
-/*jshint node:true */
 'use strict';
 
 import config from '../../libs/config';
 import githubPassport from 'passport-github';
-var GitHubStrategy = githubPassport.Strategy
+var GitHubStrategy = githubPassport.Strategy;
 
 export default function (passport, handler) {
     var callbackURL = 'http://' + config.get('server:ip') + ':' + config.get('server:port') + '/auth/login/callback';

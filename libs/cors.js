@@ -1,4 +1,3 @@
-/*jshint node:true */
 'use strict';
 
 import cors from 'cors';
@@ -12,4 +11,4 @@ var corsOptions = {
     }
 };
 
-export default cors(corsOptions)
+export default cors(corsOptions);

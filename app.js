@@ -3,16 +3,14 @@
 
 import express from 'express';
 import path from 'path';
-import fs from 'fs';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import engine from 'express-dot-engine';
 import http from 'http';
 import io from 'socket.io';
-import auth from './routes/auth'
+import auth from './routes/auth';
 import config from './libs/config';
-import db from './libs/rethink';
 import session from './libs/session';
 import routes from './routes';
 import websocket from './libs/websocket';
@@ -38,7 +36,7 @@ routes(app);
 
 //websocket
 var socket = io(server);
-var ws = websocket(socket);
+websocket(socket);
 
 app.use(express.static('public'));
 

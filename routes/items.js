@@ -1,9 +1,8 @@
-/*jshint node:true */
 'use strict';
 
 import express from 'express';
 import Item from '../models/Item';
-import cors from '../libs/cors'
+import cors from '../libs/cors';
 var ItemsRouter = express.Router();
 
 ItemsRouter.use('/', cors);
