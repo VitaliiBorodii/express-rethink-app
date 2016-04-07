@@ -17,7 +17,7 @@ export default function (passport, handler) {
                 return {
                     'originalId': profile.id,
                     'login': profile.username,
-                    'name': addprofile.displayName || null,
+                    'name': profile.displayName || null,
                     'url': profile.profileUrl,
                     'avatarUrl': profile.photos[0] ? profile.photos[0].value : null,
                     'type': 'facebook'
