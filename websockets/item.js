@@ -1,3 +1,6 @@
+/*jshint node:true */
+'use strict';
+
 import Item from '../models/Item';
 
 export default (io) => {

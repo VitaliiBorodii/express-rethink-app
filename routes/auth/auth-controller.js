@@ -1,3 +1,6 @@
+/*jshint node:true */
+'use strict';
+
 var authController = {};
 authController.getUser = function (req, res) {
     if (req.user && req.user.id) {

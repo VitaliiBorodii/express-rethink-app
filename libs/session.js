@@ -1,3 +1,6 @@
+/*jshint node:true */
+'use strict';
+
 import config from './config';
 import expressSession from 'express-session';
 import RDBStore from 'express-session-rethinkdb';

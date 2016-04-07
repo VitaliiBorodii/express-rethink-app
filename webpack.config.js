@@ -1,3 +1,6 @@
+/*jshint node:true */
+'use strict';
+
 var path = require('path');
 var webpack = require('webpack');
 var srcDir = '/assets';

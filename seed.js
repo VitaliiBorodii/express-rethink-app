@@ -1,3 +1,6 @@
+/*jshint node:true */
+'use strict';
+
 import r from 'rethinkdb';
 import config from './libs/config';
 import rInit from 'rethinkdb-init';

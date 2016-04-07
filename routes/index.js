@@ -1,4 +1,7 @@
-import ItemController from './items';
+/*jshint node:true */
+'use strict';
+
+import ItemRouter from './items';
 import authRouter from './auth/auth-router';
 
 export default (app) => {
@@ -9,5 +12,5 @@ export default (app) => {
         });
     });
     app.use('/auth', authRouter);
-    app.use('/items', ItemController);
+    app.use('/items', ItemRouter);
 };

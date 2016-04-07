@@ -1,3 +1,6 @@
+/*jshint node:true */
+'use strict';
+
 import nconf from 'nconf';
 var env = process.env;
 nconf.argv()

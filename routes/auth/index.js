@@ -3,13 +3,13 @@
 
 import config from 'nconf';
 import passport from 'passport';
-import githubPassport from 'passport-github';
-import facebookPassport from 'passport-facebook';
-
+import github from './github'
 import thinky from '../../libs/rethink';
-import User from '../../models/User'
-var GitHubStrategy = githubPassport.Strategy;
-var FacebookStrategy = facebookPassport.Strategy;
+import User from '../../models/User';
+import facebook from './facebook';
+
+github(passport, loginCallbackHandler);
+facebook(passport, loginCallbackHandler);
 
 passport.serializeUser(function (user, done) {
     return done(null, user.id);
@@ -23,7 +23,7 @@ passport.deserializeUser(function (id, done) {
         });
 });
 
-var loginCallbackHandler = function (objectMapper, type) {
+function loginCallbackHandler (objectMapper, type) {
     return function (accessToken, refreshToken, profile, done) {
         if (accessToken !== null) {
             User
@@ -53,42 +53,6 @@ var loginCallbackHandler = function (objectMapper, type) {
         }
     };
 };
-var callbackURL = 'http://' + config.get('server:ip') + ':' + config.get('server:port') + '/auth/login/callback';
-
-// Github
-passport.use(new GitHubStrategy({
-        clientID: config.get('github:clientID'),
-        clientSecret: config.get('github:clientSecret'),
-        callbackURL: callbackURL + '/github'
-    },
-    loginCallbackHandler(function (profile) {
-        return {
-            'originalId': profile.id,
-            'login': profile.username,
-            'name': profile.displayName || null,
-            'url': profile.profileUrl,
-            'avatarUrl': profile._json.avatar_url,
-            'type': 'github'
-        };
-    }, 'github')
-));
-
-passport.use(new FacebookStrategy({
-        clientID: config.get('facebook:clientID'),
-        clientSecret: config.get('facebook:clientSecret'),
-        callbackURL: 'http://fb9461e3.ngrok.io/auth/login/callback/facebook',
-        profileFields: ['id', 'displayName', 'photos', 'first_name', 'link', 'last_name', 'email']
-    },
-    loginCallbackHandler(function (profile) {
-        return {
-            'originalId': profile.id,
-            'login': profile.username,
-            'name': profile.displayName || null,
-            'url': profile.profileUrl,
-            'avatarUrl': profile.photos[0] ? profile.photos[0].value : null,
-            'type': 'facebook'
-        };
-    }, 'facebook')));
 
 
 passport.checkIfLoggedIn = function (req, res, next) {

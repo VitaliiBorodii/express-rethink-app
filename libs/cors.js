@@ -1,3 +1,6 @@
+/*jshint node:true */
+'use strict';
+
 import cors from 'cors';
 import config from './config';
 

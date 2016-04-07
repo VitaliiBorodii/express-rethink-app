@@ -1,3 +1,6 @@
+/*jshint node:true */
+'use strict';
+
 import thinky from '../libs/rethink'
 
 // Create a model - the table is automatically created

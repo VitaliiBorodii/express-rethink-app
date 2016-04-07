@@ -1,3 +1,5 @@
+'use strict';
+
 import io from 'socket.io-client';
 window.addEventListener('load', () => {
 var socket = io.connect(location.origin, {'force new connection': true});

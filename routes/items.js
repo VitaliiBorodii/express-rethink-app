@@ -1,3 +1,6 @@
+/*jshint node:true */
+'use strict';
+
 import express from 'express';
 import Item from '../models/Item';
 import cors from '../libs/cors'

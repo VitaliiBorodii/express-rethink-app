@@ -1,3 +1,6 @@
+/*jshint node:true */
+'use strict';
+
 import sharedsession  from "express-socket.io-session";
 import session from './session';
 import item from '../websockets/item';
