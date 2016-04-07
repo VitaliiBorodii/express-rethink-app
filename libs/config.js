@@ -12,7 +12,8 @@ nconf.defaults({
         host: env.RETHINK_HOST || "127.0.0.1",
         port: env.RETHINK_PORT || 28015,
         db: env.RETHINK_DBNAME || 'test'
-    }
+    },
+    corsWhitelist: []
 });
 
 export default nconf;

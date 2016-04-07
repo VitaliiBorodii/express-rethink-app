@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 import engine from 'express-dot-engine';
 import http from 'http';
 import io from 'socket.io';
+import cors from 'cors';
 import auth from './routes/auth'
 import config from './libs/config';
 import db from './libs/rethink';
@@ -17,7 +18,13 @@ import authRouter from './routes/auth/auth-router'
 var app = express();
 var port = config.get('server:port');
 var ip = config.get('server:ip');
-
+var whitelist = config.get('corsWhitelist');
+var corsOptions = {
+    origin: function(origin, callback){
+        var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+        callback(null, originIsWhitelisted);
+    }
+};
 app.set('port', port);
 app.set('ip', ip);
 var server = http.Server(app);
@@ -33,6 +40,7 @@ app.use(cookieParser());
 
 //routes and session
 app.use(session).use(auth.initialize()).use(auth.session());
+app.use(cors(corsOptions));
 routes(app);
 app.use('/auth', authRouter);
 
