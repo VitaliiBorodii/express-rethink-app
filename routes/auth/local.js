@@ -7,6 +7,11 @@ export default function (passport) {
         passwordField: 'password'
     },
         function(username, password, done) {
+            if (!username) {
+                return done (null, false, { message: 'Username is required'});
+            } else if (!password) {
+                return done (null, false, { message: 'Password is required'});
+            }
             User.filter({originalId: username}).then(function (cursor) {
                 return cursor.toArray ? cursor.toArray(cb) : cb(cursor);
                 function cb (users) {
