@@ -2,15 +2,18 @@
 
 import express from 'express';
 import authControllers from './auth-controller';
-
+import connectFlash from 'connect-flash';
 import auth from './index';
 var authRouter = express.Router();
 
+authRouter.use(connectFlash());
 //Local
 authRouter.get('/login', function(req, res) {
-        res.render('login');
+        res.render('login', {
+            error: req.flash('error')
+        });
     });
-authRouter.post('/login', auth.authenticate('local', { failureRedirect: '/auth/login' }),
+authRouter.post('/login', auth.authenticate('local', { failureRedirect: '/auth/login', failureFlash: true }),
     function(req, res) {
         res.redirect('/');
     });

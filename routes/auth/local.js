@@ -15,13 +15,13 @@ export default function (passport, handler) {
                             if (err) {
                                 return done(err);
                             } else if (!match) {
-                            return done(null, false);
+                            return done(null, false, { message: 'Invalid password '});
                         } else {
                             return done(null, users[0]);
                         }
                     });
                     } else {
-                        return done (null, false)
+                        return done (null, false, { message: 'Invalid username ' + username })
                     }
                 }
             });

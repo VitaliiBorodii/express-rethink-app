@@ -1,6 +1,6 @@
 ---
 layout: layout.dot
-title: [[= Login]]
+title: Login
 ---
 
 [[##content:
@@ -9,4 +9,5 @@ title: [[= Login]]
    <input type='password' name='password' />
    <button type='submit'>Send</button>
    </form>
+   <p>[[= model.error]]</p>
 #]]
