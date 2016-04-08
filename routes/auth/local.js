@@ -1,7 +1,7 @@
 import LocalStrategy from 'passport-local';
 import User from '../../models/User';
 
-export default function (passport, handler) {
+export default function (passport) {
     passport.use(new LocalStrategy({
         usernameField: 'username',
         passwordField: 'password'
@@ -21,7 +21,7 @@ export default function (passport, handler) {
                         }
                     });
                     } else {
-                        return done (null, false, { message: 'Invalid username ' + username })
+                        return done (null, false, { message: 'Invalid username \`' + username + '\`'});
                     }
                 }
             });
