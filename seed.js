@@ -1,6 +1,8 @@
 'use strict';
 
-import r from 'rethinkdb';
+import rethinkdbdash from 'rethinkdbdash';
+var r = rethinkdbdash({pool: false});
+
 import config from './libs/config';
 import rInit from 'rethinkdb-init';
 rInit(r);
