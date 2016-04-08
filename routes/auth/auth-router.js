@@ -10,6 +10,7 @@ authRouter.use(connectFlash());
 //Local
 authRouter.get('/login', function(req, res) {
         res.render('login', {
+            title: 'Login',
             error: req.flash('error')
         });
     });

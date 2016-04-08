@@ -3,8 +3,7 @@
 var authController = {};
 authController.getUser = function (req, res) {
     if (req.user && req.user.id) {
-        res.json(req.user);
-        return;
+        return res.json(req.user);
     }
     res.status(400).json(null);
 };

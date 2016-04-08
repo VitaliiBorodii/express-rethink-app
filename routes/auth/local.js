@@ -10,14 +10,15 @@ export default function (passport) {
             User.filter({originalId: username}).then(function (cursor) {
                 return cursor.toArray ? cursor.toArray(cb) : cb(cursor);
                 function cb (users) {
-                    if (users.length > 0) {
-                        users[0].verifyPassword(password, (err, match) => {
+                    var user = users[0];
+                    if (user) {
+                        user.verifyPassword(password, (err, match) => {
                             if (err) {
                                 return done(err);
                             } else if (!match) {
                             return done(null, false, { message: 'Invalid password '});
                         } else {
-                            return done(null, users[0]);
+                            return done(null, user);
                         }
                     });
                     } else {

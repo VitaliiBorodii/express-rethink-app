@@ -7,14 +7,15 @@ import facebook from './facebook';
 import local from './local';
 github(passport, loginCallbackHandler);
 facebook(passport, loginCallbackHandler);
-local(passport, loginCallbackHandler);
+local(passport);
 passport.serializeUser(function (user, done) {
     return done(null, user.id);
 });
 
 passport.deserializeUser(function (id, done) {
     User
-        .get(id)
+        .get(id).
+        pluck('id', 'originalId', 'name', 'email', 'avatarUrl', 'url', 'role', 'type', 'login')
         .then(function (user) {
             done(null, user);
         });
