@@ -51,6 +51,7 @@ var dev = (app.get('env') === 'development');
 //error handler
 app.use(function(err, req, res) {
     res.status(err.status || 500);
+    console.log('Error handling')
     res.format({
         text: function () {
             res.send(err.message);

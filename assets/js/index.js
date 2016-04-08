@@ -49,14 +49,15 @@ xhr2.onreadystatechange = () => {
         if(xhr2.status === 200) {
             var user = JSON.parse(xhr2.responseText);
             userElem.innerHTML = `<div>
-   <img src=${user.avatarUrl}/>
-   <p><a href=${user.url} target="_blank">
+   ${user.avatarUrl ? `<img src=${user.avatarUrl}>` : ''}
+   ${user.url ? `<p><a href=${user.url} target="_blank">` : ''}
    ${user.name ||  user.login}
    </a></p>
    <div>
    <a href="/auth/logout">Logout</a>`;
         } else {
-            userElem.innerHTML = `<div><a href="/auth/login/github">Login via github</a></div>
+            userElem.innerHTML = `<div><a href="/auth/login">Login via username and password</a></div>
+            <div><a href="/auth/login/github">Login via github</a></div>
             <div><a href="/auth/login/facebook">Login via facebook</a></div>`;
         }
     }

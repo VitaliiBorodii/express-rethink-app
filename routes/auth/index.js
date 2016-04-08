@@ -4,10 +4,10 @@ import passport from 'passport';
 import github from './github';
 import User from '../../models/User';
 import facebook from './facebook';
-
+import local from './local'
 github(passport, loginCallbackHandler);
 facebook(passport, loginCallbackHandler);
-
+local(passport, loginCallbackHandler);
 passport.serializeUser(function (user, done) {
     return done(null, user.id);
 });

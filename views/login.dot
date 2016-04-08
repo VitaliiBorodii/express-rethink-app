@@ -1,0 +1,12 @@
+---
+layout: layout.dot
+title: [[= Login]]
+---
+
+[[##content:
+   <form action='/auth/login' method="POST">
+   <input type='text' name='username' />
+   <input type='password' name='password' />
+   <button type='submit'>Send</button>
+   </form>
+#]]
