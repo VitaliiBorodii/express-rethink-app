@@ -17,7 +17,8 @@ export function signIn (req, res, next) {
                 originalId: username,
                 name: username,
                 hashedPassword: password,
-                role: 'user'
+                role: 'user',
+                type: 'local'
             });
             user.creteWithPassword((err) => {
                 if (err) {
