@@ -23,7 +23,7 @@ export function signIn (req, res, next) {
                 if (err) {
                     return next(err);
                 }
-                user.save().then(function (result) {
+                user.save().then(function () {
                 res.redirect('login');
             });
         });
