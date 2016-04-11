@@ -24,7 +24,6 @@ export function signIn (req, res, next) {
                     return next(err);
                 }
                 user.save().then(function (result) {
-                console.log(result);
                 res.redirect('login');
             });
         });
