@@ -25,7 +25,7 @@ User.define("creteWithPassword", function (next) {
                 return next(err);
             }
             // override the cleartext password with the hashed one
-            // user.hashedPassword = hash;
+             user.hashedPassword = hash;
         next(null);
         });
     });
