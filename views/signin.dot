@@ -4,11 +4,13 @@ title: [[= model.title]]
 ---
 
 [[##content:
-   <form action='/auth/login' method="POST">
-       <label for='username'>Enter username</label>
+   <form action='/auth/sign_in' method="POST">
+    <label for='username'>Pick username</label>
    <input required autofocus type='text' name='username' /></br>
-          <label for='password'>Enter password</label>
+      <label for='password'>Pick password</label>
    <input required type='password' name='password' /></br>
+      <label for='password-repeat'>Repeat password</label>
+   <input required type='password' name='password-repeat' /></br>
    <button type='submit'>Send</button>
    </form>
    <p>[[= (model.error || '')]]</p>

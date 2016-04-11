@@ -5,7 +5,7 @@ import facebookPassport from 'passport-facebook';
 var FacebookStrategy = facebookPassport.Strategy;
 
 export default function (passport, handler) {
-    var callbackURL = 'http://fb9461e3.ngrok.io/auth/login/callback/facebook';
+    var callbackURL = `${config.get('host')}/auth/login/callback/facebook`;
     if (config.get('facebook:clientID')) {
         passport.use(new FacebookStrategy({
                 clientID: config.get('facebook:clientID'),
