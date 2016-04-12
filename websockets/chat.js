@@ -12,37 +12,38 @@ export default (io) => {
         console.log('added handler for "chat_join"');
 
         socket.on('chat_join', function(data) {
-        console.log(data)
-            subscribeToMessages(data.receiver, function (error, doc) {
-                if (error) {
-                    console.log(error);
-                    process.exit(1);
-                }
-                if (doc.isSaved() === false) {
-                    console.log('delete message', doc);
-                    socket.emit('delete_message', {data: doc});
-                }
-                else if (doc.getOldValue() === null) {
-                    socket.emit('new_message', {data: doc});
-                    console.log('insert message', doc);
+        console.log(data);
+            if (data.receiver) {
+                subscribeToMessages(data.receiver, function (error, doc) {
+                    if (error) {
+                        console.log(error);
+                        process.exit(1);
+                    }
+                    if (doc.isSaved() === false) {
+                        console.log('delete message', doc);
+                        socket.emit('delete_message', {data: doc});
+                    }
+                    else if (doc.getOldValue() === null) {
+                        socket.emit('new_message', {data: doc});
+                        console.log('insert message', doc);
 
-                }
-                else {
-                    console.log('update message', {
-                        oldData: doc.getOldValue(),
-                        newData: doc
+                    }
+                    else {
+                        console.log('update message', {
+                            oldData: doc.getOldValue(),
+                            newData: doc
+                        });
+                        socket.emit('update_message', {
+                            oldData: doc.getOldValue(),
+                            newData: doc
+                        });
+                    }
+                }, function (result) {
+                    socket.emit('fetch_messages', {
+                        data: result
                     });
-                    socket.emit('update_message', {
-                        oldData: doc.getOldValue(),
-                        newData: doc
-                    });
-                }
-            }, function (result) {
-                socket.emit('fetch_messages', {
-                    data: result
                 });
-            });
-            //io.broadcast.to(id).emit('Yo\'ve joined to chat room', msg);
+            }
         });
     });
     function subscribeToMessages (receiver_id, cb, cbR) {
