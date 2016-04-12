@@ -57,7 +57,8 @@ xhr2.onreadystatechange = () => {
    <div>
    <a href="/auth/logout">Logout</a>`;
             socket.emit('chat_join', {
-                receiver: user.id
+                sender: user.id,
+                receiver: "a257eb03-fccb-4022-b3e5-f61d2568654b"
             });
             socket.on('new_message', function (data) {
                 console.log('New message:', data);

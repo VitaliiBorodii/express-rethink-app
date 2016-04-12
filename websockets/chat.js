@@ -14,7 +14,7 @@ export default (io) => {
         socket.on('chat_join', function(data) {
         console.log(data);
             if (data.receiver) {
-                subscribeToMessages(data.receiver, function (error, doc) {
+                subscribeToMessages(data.sender, data.receiver, function (error, doc) {
                     if (error) {
                         console.log(error);
                         process.exit(1);
@@ -46,11 +46,16 @@ export default (io) => {
             }
         });
     });
-    function subscribeToMessages (receiver_id, cb, cbR) {
-        Message.filter(r.row("receiver_id").eq(receiver_id).or(r.row("sender_id").eq(receiver_id))).then((result) => {
+    function subscribeToMessages (sender_id, receiver_id, cb, cbR) {
+        Message.filter((msg) => {
+            return (msg("receiver_id").eq(receiver_id)
+                .and(msg("sender_id").eq(sender_id)))
+                .or(msg("receiver_id").eq(sender_id)
+                .and(msg("sender_id").eq(receiver_id)));
+        }).then((result) => {
             cbR(result)
         });
-        Message.filter(r.row("receiver_id").eq(receiver_id).or(r.row("sender_id").eq(receiver_id))).changes().then(function (feed) {
+        Message.filter(r.row("receiver_id").eq(receiver_id).or(r.row("sender_id").eq(sender_id))).changes().then(function (feed) {
             feed.each(cb);
         }).error(function (error) {
             console.log(error);
