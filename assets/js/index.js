@@ -2,7 +2,7 @@
 
 import io from 'socket.io-client';
 window.addEventListener('load', () => {
-var socket = io.connect(location.origin, {'force new connection': true});
+var socket = io.connect(location.origin);
 var items = [];
 socket.on('connect', () => {
     console.log('connected');
@@ -12,7 +12,8 @@ socket.on('insert', (data) => {
     items.push(data.data);
     buildItems();
 });
-socket.on('delete', (data) => {
+
+    socket.on('delete', (data) => {
     console.log('delete', data);
     items = items.filter((item) => {
             return item.id !== data.data.id;
@@ -63,6 +64,16 @@ xhr2.onreadystatechange = () => {
         }
     }
 };
+
+    socket.emit('chat_join', {
+        receiver: "9a9ae7cf-d232-4749-9677-7b0c905514cf"
+    });
+    socket.on('new_message', function (data) {
+        console.log('New message:', data);
+    });
+    socket.on('fetch_messages', function (data) {
+        console.log('Your messages:', data);
+    });
 xhr2.send(null);
 
 function buildItems() {
