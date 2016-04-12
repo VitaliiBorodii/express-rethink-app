@@ -13,7 +13,7 @@ export default (io) => {
 
         socket.on('chat_join', function(data) {
         console.log(data);
-            if (data.receiver) {
+            if (data.receiver && data.sender) {
                 subscribeToMessages(data.sender, data.receiver, function (error, doc) {
                     if (error) {
                         console.log(error);
@@ -55,7 +55,12 @@ export default (io) => {
         }).then((result) => {
             cbR(result)
         });
-        Message.filter(r.row("receiver_id").eq(receiver_id).or(r.row("sender_id").eq(sender_id))).changes().then(function (feed) {
+        Message.filter((msg) => {
+            return (msg("receiver_id").eq(receiver_id)
+                .and(msg("sender_id").eq(sender_id)))
+                .or(msg("receiver_id").eq(sender_id)
+                    .and(msg("sender_id").eq(receiver_id)));
+        }).changes().then(function (feed) {
             feed.each(cb);
         }).error(function (error) {
             console.log(error);
