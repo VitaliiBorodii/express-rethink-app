@@ -56,6 +56,15 @@ xhr2.onreadystatechange = () => {
    </a></p>
    <div>
    <a href="/auth/logout">Logout</a>`;
+            socket.emit('chat_join', {
+                receiver: user.id
+            });
+            socket.on('new_message', function (data) {
+                console.log('New message:', data);
+            });
+            socket.on('fetch_messages', function (data) {
+                console.log('Your messages:', data);
+            });
         } else {
             userElem.innerHTML = `<div><a href="/auth/sign_in">Sign In</a></div>
             <div><a href="/auth/login">Login via username and password</a></div>
@@ -64,16 +73,6 @@ xhr2.onreadystatechange = () => {
         }
     }
 };
-
-    socket.emit('chat_join', {
-        receiver: "9a9ae7cf-d232-4749-9677-7b0c905514cf"
-    });
-    socket.on('new_message', function (data) {
-        console.log('New message:', data);
-    });
-    socket.on('fetch_messages', function (data) {
-        console.log('Your messages:', data);
-    });
 xhr2.send(null);
 
 function buildItems() {
