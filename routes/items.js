@@ -3,10 +3,11 @@
 import express from 'express';
 import Item from '../models/Item';
 import cors from '../libs/cors';
+import auth from '../libs/auth';
 var ItemsRouter = express.Router();
 
 ItemsRouter.use('/', cors);
-
+ItemsRouter.use('/', auth);
 ItemsRouter.get('/', (req, res) => {
     Item.run().then(function (result) {
         res.json(result);
