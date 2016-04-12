@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run jshint && npm run build && npm run seed && npm run server",
     "forever": "pm2 start pm2.json",
-    "forever-stop": "pms delete ",
+    "forever-stop": "pm2 delete ",
     "server": "babel-node app.js",
     "build": "webpack",
     "seed": "babel-node seed.js",
