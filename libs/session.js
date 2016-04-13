@@ -30,7 +30,7 @@ var session = expressSession({
     saveUninitialized: true,
     cookie: {
         secure : false,
-        maxAge: 860000
+        maxAge: 86400000
     },
     store: rdbStore
 });

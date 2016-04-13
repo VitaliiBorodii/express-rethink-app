@@ -3,8 +3,8 @@
 import sharedsession  from "express-socket.io-session";
 import session from './session';
 import item from '../websockets/item';
-import chat from '../websockets/chat';
-
+//import chat from '../websockets/chat';
+import messages from '../websockets/message';
 export default function (io) {
     io.use(sharedsession(session, {
         autoSave: true,
@@ -15,6 +15,7 @@ export default function (io) {
         console.log('user joined!');
         });
     item(io);
-    chat(io);
+    messages(io);
+    //chat(io);
     return io;
 }

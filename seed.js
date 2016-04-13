@@ -19,6 +19,10 @@ r.init({
     {
         name: 'users',
         indexes: ['originalId']
+    },
+    {
+        name: 'messages',
+        indexes: ['createdAt']
     }
 ])
 .then(function (conn) {
