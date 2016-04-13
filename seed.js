@@ -15,7 +15,7 @@ r.init({
     {
         name: 'items'
     },
-    'session',
+    'sessions',
     {
         name: 'users',
         indexes: ['originalId']

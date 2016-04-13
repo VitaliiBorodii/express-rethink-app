@@ -18,7 +18,7 @@ const rdbStore = new Store({
         timeout: 20,
         timeoutError: 1000
     },
-    table: 'session',
+    table: 'sessions',
     sessionTimeout: 86400000,
     flushInterval: 60000,
     debug: false

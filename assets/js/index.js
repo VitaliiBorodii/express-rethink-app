@@ -75,7 +75,7 @@ xhr2.send(null);
 function buildItems() {
     var lis = [];
     for (let i = 0; i < items.length; i++) {
-        lis.push(`<li>${items[i].id} | ${items[i].title}</li>`);
+        lis.push(`<li>${items[i].title || items[i].id}</li>`);
     }
     elem.innerHTML = lis.join('\n');
 }
