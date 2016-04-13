@@ -6,14 +6,13 @@ var r = thinky.r;
 export default (io) => {
     io.sockets.on('connection', (socket) => {
         var feed;
-        console.log(socket.handshake.session);
         var user = socket.handshake.session.passport ? socket.handshake.session.passport.user : null;
         if (user) {
             subscribeToMessages(user, (f) => {
                 feed = f;
                 return (error, doc) => {
                     if (error) {
-                        console.log(error);
+                        console.log(error);remove
                         process.exit(1);
                     }
                     if (doc.isSaved() === false) {
