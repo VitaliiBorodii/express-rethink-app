@@ -28,8 +28,9 @@ var session = expressSession({
     resave: false,
     secret: 'my5uperSEC537(key)!',
     saveUninitialized: true,
+    rolling: true,
     cookie: {
-        secure : false,
+        secure : true,
         maxAge: 86400000
     },
     store: rdbStore

@@ -49,7 +49,7 @@ export default (io) => {
         });
     });
     function subscribeToMessages (user_id, cb, cbR) {
-        query(user_id).limit(50).then((result) => {
+        query(user_id).orderBy('date', r.desc('createdAt')).limit(50).then((result) => {
             cbR(result);
         });
         query(user_id).changes().then((feed) => {
@@ -62,8 +62,7 @@ export default (io) => {
     function query (user_id) {
         return Message.filter((msg) => {
             return (msg("receiver_id").eq(user_id)
-                .or(msg("sender_id").eq(user_id)))
-                .orderBy('date', r.desc('createdAt'));
+                .or(msg("sender_id").eq(user_id)));
         });
     }
 };
