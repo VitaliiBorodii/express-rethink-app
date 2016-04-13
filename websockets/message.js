@@ -12,7 +12,7 @@ export default (io) => {
                 feed = f;
                 return (error, doc) => {
                     if (error) {
-                        console.log(error);remove
+                        console.log(error);
                         process.exit(1);
                     }
                     if (doc.isSaved() === false) {
