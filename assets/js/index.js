@@ -59,6 +59,12 @@ xhr2.onreadystatechange = () => {
             socket.on('new_message', function (data) {
                 console.log('New message:', data);
             });
+            socket.on('delete_message', function (data) {
+                console.log('Remove message:', data);
+            });
+            socket.on('update_message', function (data) {
+                console.log('Update message:', data);
+            });
             socket.on('fetch_messages', function (data) {
                 console.log('Your messages:', data);
             });

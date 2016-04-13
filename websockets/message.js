@@ -26,7 +26,7 @@ export default (io) => {
 
                     }
                     else {
-                        console.log('update message', {
+                        console.log('update_message', {
                             oldData: doc.getOldValue(),
                             newData: doc
                         });
