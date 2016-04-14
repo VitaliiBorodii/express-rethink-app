@@ -4,11 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run jshint && npm run build && npm run seed && npm run server",
-    "forever": "pm2 start pm2.json",
-    "forever-stop": "pm2 delete ",
-    "server": "babel-node app.js",
-    "build": "webpack",
+    "prestart": "babel src --out-dir dist && npm run build-assets",
+    "start": "pm2 start pm2.json",
+    "stop": "pm2 delete app.js",
+    "build-assets": "webpack",
     "seed": "babel-node seed.js",
     "watch": "webpack --watch",
     "jshint": "jshint .",
@@ -50,6 +49,7 @@
     "webpack": "^1.12.14"
   },
   "devDependencies": {
-    "jshint": "^2.9.1"
+    "jshint": "^2.9.1",
+    "nodemon": "^1.9.1"
   }
 }

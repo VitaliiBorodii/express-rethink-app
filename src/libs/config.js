@@ -4,7 +4,7 @@ import nconf from 'nconf';
 var env = process.env;
 nconf.argv()
     .env()
-    .file({file: './config/development.json'});
+    .file({file: 'config/development.json'});
 nconf.defaults({
     server: {
         port : env.NODE_PORT || 1337,
